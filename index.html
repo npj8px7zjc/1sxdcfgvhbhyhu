@@ -185,42 +185,6 @@ body {
 </head>
 <body>
 
-<div id="passwordGate" style="
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-">
-  <div style="
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    text-align: center;
-    width: 280px;
-    font-family: Inter, sans-serif;
-  ">
-    <p>Please enter the session password</p>
-    <input
-      type="password"
-      id="passwordInput"
-      style="width:100%; padding:10px; margin-top:10px;"
-    >
-    <button
-      id="passwordBtn"
-      style="margin-top:15px; width:100%; padding:10px;"
-    >
-      Continue
-    </button>
-    <div id="passwordError" style="color:red; display:none; margin-top:10px;">
-      Incorrect password
-    </div>
-  </div>
-</div>
-
-
 <div class="container">
 
   <!-- Header Section -->
@@ -383,32 +347,6 @@ closeModal.addEventListener('click', () => {
 modal.addEventListener('click', (e) => {
   if(e.target === modal) modal.style.display = 'none';
 });
-
-
-/* ===== Session Password Gate ===== */
-
-const PASSWORD_CSV =
-  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSe19k1OUGXvHIZccG0gFO7Y7QUCOlZ7KeZ3mbN6FEyXAI_deFDtYPTWm_PlTXY-beuloZ0fW010_jd/pub?gid=0&single=true&output=csv";
-
-async function fetchPassword() {
-  const res = await fetch(PASSWORD_CSV, { cache: "no-store" });
-  return (await res.text()).trim();
-}
-
-document.getElementById("passwordBtn").addEventListener("click", async () => {
-  const entered = document.getElementById("passwordInput").value.trim();
-  const actual = await fetchPassword();
-
-  if (entered && entered === actual) {
-    document.getElementById("passwordGate").style.display = "none";
-  } else {
-    document.getElementById("passwordError").style.display = "block";
-  }
-});
-
-
-
-
 </script>
 
 </body>
