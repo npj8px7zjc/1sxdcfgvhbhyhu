@@ -127,7 +127,6 @@ hr {
   transform: translateY(-2px);
 }
 
-/* Modal Styles */
 .modal {
   display: none; /* hidden initially */
   position: fixed;
@@ -137,20 +136,21 @@ hr {
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  padding: 0 10px;         /* horizontal padding for small screens */
+  overflow-y: auto;        /* allow scrolling if needed */
+  box-sizing: border-box;  /* ensure padding doesn't shift modal */
 }
 
 .modal-content {
+  max-width: 320px; /* or whatever width you prefer */
+  width: 100%;      /* fill available space within padding */
   background: rgba(255,255,255,0.95);
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
-  font-family: 'Inter', sans-serif;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-  max-width: 300px;
-  width: 100%;
 }
 
 .modal-content p {
@@ -206,7 +206,7 @@ hr {
 }
 
 .scale-legend .scale-labels span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: #0d1b2a;
 }
@@ -222,6 +222,18 @@ hr {
   outline: none;
   border-color: #2196F3;
   box-shadow: 0 0 5px rgba(33,150,243,0.5);
+}
+
+#passwordGate input {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px;
+  margin: 0 auto 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 1rem;
+  box-sizing: border-box; /* ensures padding fits inside width */
+  display: block;
 }
 
 #passwordBtn:hover {
@@ -475,7 +487,7 @@ document.getElementById("passwordBtn").addEventListener("click", async () => {
 
 
 // Function to start auto-timeout
-function startAutoTimeout(durationMinutes = 30) {
+function startAutoTimeout(durationMinutes = 5) {
   // Convert minutes to milliseconds
   const durationMs = durationMinutes * 60 * 1000;
 
