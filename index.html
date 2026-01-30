@@ -25,6 +25,7 @@ body {
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  display: none;
 }
 
 /* Header Section */
@@ -52,6 +53,15 @@ body {
   display: inline-block;
   padding-bottom:5px;
   margin-top:0;
+}
+
+hr {
+  border: none; /* remove default */
+  height: 2px; 
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  border-radius: 10px;
+  margin: 20px 0; /* space above & below */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 /* Statements & Buttons */
@@ -174,6 +184,51 @@ body {
   background: #1976D2;
 }
 
+
+/* Scale Legend Styling */
+.scale-legend {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  margin-bottom: 20px;
+  text-align: center;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 10px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.scale-legend .scale-labels,
+.scale-legend .scale-numbers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.scale-legend .scale-labels span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0d1b2a;
+}
+
+.scale-legend .scale-numbers span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2196F3;
+  margin-top: 5px;
+}
+
+#passwordGate input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33,150,243,0.5);
+}
+
+#passwordBtn:hover {
+  background: #1976D2;
+  transform: translateY(-2px);
+}
+
 /* Responsive */
 @media(max-width: 400px) {
   .buttons button {
@@ -184,108 +239,152 @@ body {
 </style>
 </head>
 <body>
+<div id="passwordGate" class="modal" style="display:flex;">
+  <div class="modal-content">
+    <p>Please enter the session password</p>
+    <input
+      type="password"
+      id="passwordInput"
+      style="width:100%; padding:12px; margin-top:15px; border-radius:12px; border:1px solid rgba(0,0,0,0.2); font-size:1rem;"
+    >
+    <button id="passwordBtn" style="margin-top:20px; width:100%; padding:12px; border-radius:12px; border:none; background:#2196F3; color:white; font-size:1rem; cursor:pointer; transition:all 0.3s;">
+      Continue
+    </button>
+    <div id="passwordError" style="color:red; display:none; margin-top:10px; font-weight:500;">
+      Incorrect password
+    </div>
+  </div>
+</div>
 
 <div class="container">
 
   <!-- Header Section -->
   <div class="heading-section">
-    <h1>Self-Assessment Quiz</h1>
-    <h2>Proof of Concept © Marco Erlank 2026</h2>
+    <h1>Emotional Intelligence Quiz</h1>
+    <h2>EQ Leadership Training</h2>
   </div>
 
+
+  <!-- Scale Legend -->
+<div class="scale-legend">
+  <div class="scale-labels">
+    <span>Almost Never</span>
+    <span>Seldom</span>
+    <span>Sometimes</span>
+    <span>Usually</span>
+    <span>Always</span>
+  </div>
+  <div class="scale-numbers">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+  </div>
+</div>
+  <p>With reference to the above scale, how true is each statement of me</p>
+<hr>
   <!-- Quiz Form -->
   <form id="quizForm">
     <!-- 9 Statements -->
     <div class="statement">
-      <p>1. I feel confident in my daily tasks.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>2. I handle stress effectively.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>3. I communicate clearly with others.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>4. I adapt well to changes.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>5. I manage my time effectively.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>6. I work well in a team.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>7. I set and achieve goals.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>8. I take initiative in tasks.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
-    <div class="statement">
-      <p>9. I maintain a positive attitude.</p>
-      <div class="buttons">
-        <button type="button" data-value="1">1</button>
-        <button type="button" data-value="2">2</button>
-        <button type="button" data-value="3">3</button>
-        <button type="button" data-value="4">4</button>
-        <button type="button" data-value="5">5</button>
-      </div>
-    </div>
+  <p>1. In all circumstances I respect other people &amp; their feelings</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>2. I can easily identify my feelings</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>3. I take responsibility for my own emotions</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>4. I can maintain control of my emotions</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>5. I find it easy to validate others’ feelings and values</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>6. I do not rush to judge or label other people and situations</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>7. I do not try to manipulate, criticize, blame or overpower others</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>8. I constantly challenge my habitual responses, and I am willing to try considered alternatives</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
+
+<div class="statement">
+  <p>9. I live in the present, learn from experiences, and do not carry negative feelings forward</p>
+  <div class="buttons">
+    <button type="button" data-value="1">1</button>
+    <button type="button" data-value="2">2</button>
+    <button type="button" data-value="3">3</button>
+    <button type="button" data-value="4">4</button>
+    <button type="button" data-value="5">5</button>
+  </div>
+</div>
 
     <button type="submit" class="submit-btn">Submit</button>
   </form>
@@ -347,6 +446,46 @@ closeModal.addEventListener('click', () => {
 modal.addEventListener('click', (e) => {
   if(e.target === modal) modal.style.display = 'none';
 });
+
+
+/* ===== Session Password Gate ===== */
+
+const PASSWORD_CSV =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSe19k1OUGXvHIZccG0gFO7Y7QUCOlZ7KeZ3mbN6FEyXAI_deFDtYPTWm_PlTXY-beuloZ0fW010_jd/pub?gid=0&single=true&output=csv";
+
+async function fetchPassword() {
+  const res = await fetch(PASSWORD_CSV, { cache: "no-store" });
+  return (await res.text()).trim();
+}
+
+document.getElementById("passwordBtn").addEventListener("click", async () => {
+  const entered = document.getElementById("passwordInput").value.trim();
+  const actual = await fetchPassword();
+
+  if (entered && entered === actual) {
+  document.getElementById("passwordGate").style.display = "none"; // hide password overlay
+  document.querySelector(".container").style.display = "block";   // show quiz container
+
+  startAutoTimeout(60);
+
+}else {
+    document.getElementById("passwordError").style.display = "block";
+  }
+});
+
+
+// Function to start auto-timeout
+function startAutoTimeout(durationMinutes = 30) {
+  // Convert minutes to milliseconds
+  const durationMs = durationMinutes * 60 * 1000;
+
+  setTimeout(() => {
+    alert("Session timed out. Please enter the password again.");
+    location.reload(); // reloads page, shows password gate again
+  }, durationMs);
+}
+
+
 </script>
 
 </body>
